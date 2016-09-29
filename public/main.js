@@ -17,4 +17,6 @@ $(document).ready(function() {
         socket.emit('message', message);
         input.val('');
     });
+
+    socket.on('message', addMessage);
 });
