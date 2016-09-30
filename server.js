@@ -18,12 +18,23 @@ var io = socket_io(server);
 
 // server listening event. listens for messages from client.
 io.on('connection', function (socket) {
+	// var user = 'user is ' + socket.id;
+	// console.log(socket.nsp);
+	// console.log(socket.server);
+	// console.log(socket.client);
+	// console.log(io);
+	// console.log('client counts ' + socket.server.eio.clientsCount);
+	// console.log(user);
+	// console.log(socket);
+
+	socket.broadcast.emit('message', 'New user connected');
     console.log('Client connected');
     // second event listener
     socket.on('message', function(message) {
         console.log('Received message:', message);
         // broadcasts to any clients listening
         socket.broadcast.emit('message', message);
+        // console.log(socket);
     });
 });
 

@@ -22,4 +22,5 @@ $(document).ready(function() {
     });
     // listens for new message from client
     socket.on('message', addMessage);
+    
 });
