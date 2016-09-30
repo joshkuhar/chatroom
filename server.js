@@ -16,17 +16,12 @@ var server = http.Server(app);
 //  a socket server.
 var io = socket_io(server);
 
+var userCount = 0;
 // server listening event. listens for messages from client.
 io.on('connection', function (socket) {
-	// var user = 'user is ' + socket.id;
-	// console.log(socket.nsp);
-	// console.log(socket.server);
-	// console.log(socket.client);
-	// console.log(io);
-	// console.log('client counts ' + socket.server.eio.clientsCount);
-	// console.log(user);
-	// console.log(socket);
-
+	userCount++;
+	console.log('the user count is ' + userCount);
+	console.log('client counts ' + socket.server.eio.clientsCount);
 	socket.broadcast.emit('message', 'New user connected');
     console.log('Client connected');
     // second event listener
@@ -35,6 +30,10 @@ io.on('connection', function (socket) {
         // broadcasts to any clients listening
         socket.broadcast.emit('message', message);
         // console.log(socket);
+    });
+    socket.on('disconnect', function(){
+        socket.broadcast.emit('message', 'Client Disonnected');
+        console.log('user disconnected');
     });
 });
 
