@@ -31,6 +31,12 @@ io.on('connection', function (socket) {
         socket.broadcast.emit('message', message);
         // console.log(socket);
     });
+    // socket.on('newUser', function(newUser){
+    // 	socket.newUser = newUser;
+    // 	socket.broadcast.emit('userAlert', {
+    // 		newUser: socket.newUser
+    // 	});
+    // });
     socket.on('disconnect', function(){
         socket.broadcast.emit('message', 'Client Disonnected');
         console.log('user disconnected');
